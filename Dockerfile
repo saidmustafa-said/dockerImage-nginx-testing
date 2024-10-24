@@ -1,11 +1,20 @@
-# Use the official NGINX image from Docker Hub
-FROM nginx:latest
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
-# Copy custom configuration files (optional)
-# COPY ./nginx.conf /etc/nginx/nginx.conf
+# Set the working directory to /app
+WORKDIR /app
 
-# Expose port 80 for web traffic
-EXPOSE 80
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Start NGINX
-CMD ["nginx", "-g", "daemon off;"]
+# Install Flask
+RUN pip install flask
+
+# Make port 5000 available to the world outside this container
+EXPOSE 6969
+
+# Define environment variable
+ENV FLASK_APP=app.py
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
