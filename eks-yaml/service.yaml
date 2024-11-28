@@ -1,0 +1,14 @@
+# @format
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-service
+spec:
+  type: ClusterIP
+  selector:
+    app: flask-app
+  ports:
+    - protocol: TCP
+      port: 80 # Port exposed by the service
+      targetPort: 6969 # Port your Flask app listens on
